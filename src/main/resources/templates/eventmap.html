@@ -1,0 +1,48 @@
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  layout:decorator="layout">
+<head>
+<script th:src="@{http://maps.googleapis.com/maps/api/js;sensor=false}"> </script>
+<script> function initialize() 
+{ 
+	var mapProp = { 
+			center:new google.maps.LatLng(66.0,26.0), 
+			zoom:5, mapTypeId:google.maps.MapTypeId.ROADMAP 
+			}; 
+	var map=new google.maps.Map(document.getElementById("googleMap"),mapProp); 
+	//var data = /*[[${items}]]*/;
+	var data = [{"name":"JAMK", "lat":"62.2411328", "lng":"25.7593833"}];
+//	var bounds  = new google.maps.LatLngBounds();
+	var infowindow = new google.maps.InfoWindow();
+	for(var i=0; i< data.length;i++) {
+	    if(data[i].lat !== null && data[i].lat !== "") {
+	        var marker = new google.maps.Marker({
+	          position: {lat: parseFloat(data[i].lat), lng: parseFloat(data[i].lng)},
+	          map: map,
+	          title: data[i].name
+	        });
+	        var infoContent = '<div id="content">'+
+	        '<h1 id="firstHeading" class="firstHeading">' + data[i].name + '</h1>'+
+	        '</div>';
+	        google.maps.event.addListener(marker,'click', (function(marker,content){
+	            return function() {
+	                infowindow.setContent(content);
+	                infowindow.open(map,marker);
+	            };
+	        })(marker,infoContent));
+	  //      var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+	  //      bounds.extend(loc);
+	    }
+	 }
+//	map.fitBounds(bounds);
+//	map.panToBounds(bounds);
+} 
+google.maps.event.addDomListener(window, 'load', initialize); 
+
+</script></head>
+
+<body>
+<div id="googleMap" style="width:1024px;height:1024px;"></div>
+
+</body>
+</html>
