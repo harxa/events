@@ -24,9 +24,12 @@ public class EventsApplication {
 
 			
 			Event e1 = new Event ("JAMK Syyslukukausi", "Lutakko", "20.09.2019", "62.2411328", "25.7593833");
-			
+			Event e2 = new Event ("Qstock 2019", "Oulu", "26.07.2019", "65.0058582", "25.4680658");
+			Event e3 = new Event ("Ruska maraton", "Levi", "7.09.2019", "67.7050229", "24.7242054");
 			
 			repository.save(e1);
+			repository.save(e2);
+			repository.save(e3);
 			
 			//Create users: user/user, useri/useri, admin/admin 
 			User user1 = new User("user", "$2a$10$UBii/e.Wy3sx5HiWgpfj7edVYR/e/zTuAoKP5bHZeFJcRe7WsIEz6", "user@email.me", "USER");

@@ -3,26 +3,28 @@
   layout:decorator="layout">
 <head>
 <script th:src="@{http://maps.googleapis.com/maps/api/js;sensor=false}"> </script>
-<script> function initialize() 
+<script th:inline="javascript"> 
+function initialize() 
 { 
 	var mapProp = { 
 			center:new google.maps.LatLng(66.0,26.0), 
 			zoom:5, mapTypeId:google.maps.MapTypeId.ROADMAP 
 			}; 
 	var map=new google.maps.Map(document.getElementById("googleMap"),mapProp); 
-	//var data = /*[[${items}]]*/;
-	var data = [{"name":"JAMK", "lat":"62.2411328", "lng":"25.7593833"}];
-//	var bounds  = new google.maps.LatLngBounds();
+	var data = /*[[${events}]]*/;
 	var infowindow = new google.maps.InfoWindow();
 	for(var i=0; i< data.length;i++) {
-	    if(data[i].lat !== null && data[i].lat !== "") {
-	        var marker = new google.maps.Marker({
-	          position: {lat: parseFloat(data[i].lat), lng: parseFloat(data[i].lng)},
+    	if(data[i].lat !== null && data[i].lat !== "") {
+   		console.log(data[i].lat);
+       	var marker = new google.maps.Marker({
+	          position: {lat: parseFloat(data[i].lat), lng: parseFloat(data[i].lon)},
 	          map: map,
-	          title: data[i].name
+	          title: data[i].eventName
 	        });
+	 
 	        var infoContent = '<div id="content">'+
-	        '<h1 id="firstHeading" class="firstHeading">' + data[i].name + '</h1>'+
+	        '<h1 id="firstHeading" class="firstHeading">' + data[i].eventName + '</h1>'+
+	        data[i].eventPlace + "<p>" + data[i].dateTime +
 	        '</div>';
 	        google.maps.event.addListener(marker,'click', (function(marker,content){
 	            return function() {
@@ -30,12 +32,8 @@
 	                infowindow.open(map,marker);
 	            };
 	        })(marker,infoContent));
-	  //      var loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
-	  //      bounds.extend(loc);
 	    }
 	 }
-//	map.fitBounds(bounds);
-//	map.panToBounds(bounds);
 } 
 google.maps.event.addDomListener(window, 'load', initialize); 
 

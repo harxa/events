@@ -35,10 +35,10 @@
     		<td th:text="${event.lat}"></td>
     		<td th:text="${event.lon}"></td> 
     		<td sec:authorize="hasRole('ADMIN')"><a th:href="@{/delete/{id}(id=${event.id})}" class="btn btn-danger" >Delete</a></td>
-    		<td><a th:href="@{/edit/{id}(id=${event.id})}">Edit</a></td>  
     	</tr>
 	</table>
-	<a href="/add" class="btn btn-success">Add Event</a> 
+	<a href="/add" class="btn btn-success">Add Event</a>
+	<a href="/eventmap" class="btn btn-success">Show map</a>  
 </div>
 </body>
 </html>

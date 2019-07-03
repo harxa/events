@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Eventlist</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Add book</h1>
+	<div>
+		<form th:object="${event}" th:action="@{save}" action="#" method="post">
+		  	<label for="eventName">Name</label>
+			<input type="text" id="eventName" th:field="*{eventName}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+		  	<label for="eventPlace">Place</label>
+			<input type="text" id="eventPlace" th:field="*{eventPlace}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+		  	<label for="dateTime">Date</label>
+			<input type="text" id="dateTime" th:field="*{dateTime}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+		  	<label for="lat">Latidute</label>
+			<input type="text" id="lat" th:field="*{lat}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+		  	<label for="lon">Longitude</label>
+			<input type="text" id="lon" th:field="*{lon}" />
+			<div style="clear: both; display: block; height: 10px;"></div>								
+			<input type="submit" value="Save"></input>
+		</form>
+	</div>
+</body>
+</html>

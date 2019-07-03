@@ -34,24 +34,22 @@ public class EventController {
         return "eventlist";
     }
     
-/*    @RequestMapping(value="/eventmap", method=RequestMethod.GET)
-    public ModelAndView getPages(HttpServletRequest request) {
-        Geolocation geoloc = geolocDAO.get();
-        ModelAndView model = new ModelAndView("map");
-        List<Geolocation> listGeo = geolocDAO.list();
-        model.addObject("listGeo", listGeo);
-        return model;
-    }*/
     @RequestMapping(value="/eventmap", method=RequestMethod.GET)
     public String EventMap(Model model) {
     	model.addAttribute("events", repository.findAll());
         return "eventmap";
     }
 	
-	
+    @RequestMapping(value = "/add")
+    public String addBook(Model model){
+    	model.addAttribute("event", new Event());
+		return "addevent";
+    }
+    
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(Event event){
         repository.save(event);
         return "redirect:eventlist";
     }  
+    
 }
